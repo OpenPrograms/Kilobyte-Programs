@@ -16,7 +16,7 @@ def install(data = {})
     end
 end
 def depend(*packages)
-    ($current[:dependencies] << packages).flatten!
+    (($current[:dependencies] ||= []) << packages).flatten!
 end
 def description(desc)
     $current[:description] = desc
@@ -42,7 +42,7 @@ def search(path)
         if File.exist? file
             puts "Found package #{file}"
             $entry = entry
-            $current = {files: {}, dependencies: [], repo: File.join('tree/master', entry)}
+            $current = {files: {}, repo: File.join('tree/master', entry)}
             $id = nil
             require_relative file
             $data[$id] = $current
