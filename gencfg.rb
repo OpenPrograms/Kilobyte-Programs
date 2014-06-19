@@ -27,6 +27,9 @@ end
 def note(note)
     $current[:note] = note
 end
+def authors(authors)
+    $current[:authors] = authors
+end
 
 def dirs(path)
     Dir.entries(path).select {|entry| File.directory? File.join(path,entry) and !(entry =='.' || entry == '..') }
@@ -39,7 +42,7 @@ def search(path)
         if File.exist? file
             puts "Found package #{file}"
             $entry = entry
-            $current = {files: {}, dependencies: [], hidden: false, repo: File.join('tree/master', entry), note: ''}
+            $current = {files: {}, dependencies: [], repo: File.join('tree/master', entry)}
             $id = nil
             require_relative file
             $data[$id] = $current
