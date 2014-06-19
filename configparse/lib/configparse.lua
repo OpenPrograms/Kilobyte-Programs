@@ -194,11 +194,9 @@ local function parse(tokens)
                         end
                     else 
                         table.insert(option.args, t.value)
-                        print("test "..t.value)
                     end
 
                 end
-                print("test"..option.name)
                 options:add(option)
             end
         end
@@ -211,9 +209,5 @@ function configparse.parse(data)
     local tokens = tokenize(data)
     return parse(tokens)
 end
-
--- debug:
-configparse.t = tokenize
-configparse.p = parse
 
 return configparse
