@@ -12,7 +12,7 @@ def name(name)
 end
 def install(data = {})
     data.each_pair do |k, v|
-        $current[:files][k] = v
+        $current[:files][File.join("master/#{$entry}", k)] = v
     end
 end
 def depend(*packages)
