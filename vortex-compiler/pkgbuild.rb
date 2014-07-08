@@ -7,4 +7,4 @@ install Dir['lib/vortex/*.lua'] => '/lib/vortex'
 
 authors 'Kilobyte'
 
-depend :'vortex-runtime'
+depend :'vortex-runtime' => '/'
