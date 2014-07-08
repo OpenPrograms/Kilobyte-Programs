@@ -8,6 +8,6 @@ install Dir['lib/ubersandbox/*.lua'] => '/lib/ubersandbox'
 
 authors 'Kilobyte'
 
-depend :'oop-system'
-depend :configparser
-depend :deepcopy
+depend :'oop-system' => '/'
+depend configparser: '/'
+depend deepcopy: '/'

@@ -12,11 +12,19 @@ def name(name)
 end
 def install(data = {})
     data.each_pair do |k, v|
-        $current[:files][File.join("master/#{$entry}", k)] = v
+        if k.is_a? Array
+          k.each do |k2|
+            $current[:files][File.join("master/#{$entry}", k2)] = v
+          end
+        else
+          $current[:files][File.join("master/#{$entry}", k)] = v
+        end
     end
 end
-def depend(*packages)
-    (($current[:dependencies] ||= []) << packages).flatten!
+def depend(packages = {})
+    packages.each do |k, v|
+        $current[:dependencies][k] = v
+    end
 end
 def description(desc)
     $current[:description] = desc
@@ -42,9 +50,11 @@ def search(path)
         if File.exist? file
             puts "Found package #{file}"
             $entry = entry
-            $current = {files: {}, repo: File.join('tree/master', entry)}
+            $current = {files: {}, repo: File.join('tree/master', entry), dependencies: {}}
             $id = nil
-            require_relative file
+            Dir.chdir File.join(path, entry) do
+                require_relative file
+            end
             $data[$id] = $current
         end
     end
