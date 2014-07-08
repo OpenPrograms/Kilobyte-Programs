@@ -24,7 +24,7 @@ end
 
 local function makeiter(t)
     local i = 0
-    local n = table.getn(t)
+    local n = #t
     return function ()
         i = i + 1
         if i <= n then return t[i] end
