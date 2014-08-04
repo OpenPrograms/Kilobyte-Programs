@@ -56,8 +56,8 @@ myopt test {
 ...would yield this output...
 
 ```
-hello
-myopt
+Option found: hello
+Option found: myopt
 ---
 test
  -> abc
